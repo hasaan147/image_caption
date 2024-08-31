@@ -17,7 +17,6 @@ max_length_path = os.path.join(WORKING_DIR, 'max_length.pkl')
 # Load model, tokenizer, and max_length with error handling
 try:
     model = tf.keras.models.load_model(model_path)
-    st.write("Model loaded successfully.")
 except Exception as e:
     st.error(f"Error loading model: {e}")
 
@@ -29,14 +28,12 @@ vgg_model = tf.keras.Model(inputs=vgg_model.inputs, outputs=vgg_model.layers[-2]
 try:
     with open(tokenizer_path, 'rb') as f:
         tokenizer = pickle.load(f)
-    st.write("Tokenizer loaded successfully.")
 except Exception as e:
     st.error(f"Error loading tokenizer: {e}")
 
 try:
     with open(max_length_path, 'rb') as f:
         max_length = pickle.load(f)
-    st.write("Max length loaded successfully.")
 except Exception as e:
     st.error(f"Error loading max length: {e}")
 
@@ -47,7 +44,7 @@ def idx_to_word(integer, tokenizer):
             return word
     return None
 
-# Updated function to predict image caption
+# Function to predict image caption
 def predict_caption(model, image, tokenizer, max_length):
     in_text = 'startseq'
     for i in range(max_length):
