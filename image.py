@@ -47,7 +47,7 @@ def idx_to_word(integer, tokenizer):
             return word
     return None
 
-# Function to predict image caption
+# Updated function to predict image caption
 def predict_caption(model, image, tokenizer, max_length):
     in_text = 'startseq'
     for i in range(max_length):
@@ -61,7 +61,9 @@ def predict_caption(model, image, tokenizer, max_length):
         in_text += " " + word
         if word == 'endseq':
             break
-    return in_text
+    # Remove 'startseq' and 'endseq' from the generated caption
+    final_caption = in_text.split()[1:-1]
+    return ' '.join(final_caption)
 
 # Main Streamlit app function
 def main():
